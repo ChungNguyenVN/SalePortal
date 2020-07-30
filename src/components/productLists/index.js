@@ -635,6 +635,62 @@ class ListProduct extends Component {
                                     </div>
                                 </div>
                             </Modal>
+                            {/* confirmDel */}
+                            <Modal
+                                size="sm"
+                                isOpen={ this.state.modalDelete }
+                                toggle={ this.tog_Delete }
+                                >
+                                <div className="modal-header">
+                                    <h5
+                                        className="modal-title mt-0 text-primary"
+                                        id="modalDel"
+                                        >
+                                        Bạn muốn xóa không ?
+                                    </h5>
+                                    <button
+                                        onClick={() =>
+                                            this.setState({ modalDelete: false })
+                                        }
+                                        type="button"
+                                        className="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                        >
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div className="modal-body">
+                                   
+                                    <div className="button-items text-center">
+                                        <button type="button" className="btn btn-primary btn-md waves-effect waves-light"
+                                            onClick={() =>
+                                                this.setState({ modalDelete: false })
+                                            }
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                            > Hủy
+                                        </button>
+                                        <button className="waves-effect btn-danger btn btn-md waves-light" type="button" value="del"  
+                                            onClick={e => this.handleRemoveRow(e, "01")}
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                        >
+                                            Xóa
+                                        </button>
+                                    </div>
+                                    {/* <div className="text-center mt-3 col-lg-12">
+                                        <button type="button" className="btn btn-primary btn-md waves-effect waves-light"
+                                            onClick={() =>
+                                                this.setState({ modalDelete: false })
+                                            }
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                            > Đóng
+                                        </button>
+                                    </div> */}
+                                </div>
+                            </Modal>
                         </div>
                     </CardBody>
                 </Card>

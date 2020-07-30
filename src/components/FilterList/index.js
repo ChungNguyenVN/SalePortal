@@ -5,20 +5,48 @@ import {Table, Thead, Tbody, Tr, Th, Td} from 'react-super-responsive-table';
 
 import { config} from '../../pages/environment';
 
+
 class Filter extends Component { 
     constructor(props) {
         super(props);
         this.state = {
             isFilter: false,
-            modalEdit: false
+            modalEdit: false,
+            modalDelete: false,
+            // itemTable
+            tableList: [
+                { id: 1, number: 1, name: "Nguyễn Văn A", types: "Thanh toán", user: "Đặng Thanh Nam", department: "Kế toán", location: "TSGKT", status: "Hoạt động", unit: "Microsoft", action:"" },
+                { id: 2, number: 2, name: "Nguyễn Văn B", types: "Trả góp", user: "Đặng Thanh Công", department: "Ký thuật", location: "TSGIT", status: "Tạm dừng", unit: "Oracle", action:"" },
+                { id: 3, number: 3, name: "Nguyễn Văn C", types: "Mua hàng", user: "Đặng Thanh Minh", department: "Nhân sự", location: "TSGHR", status: "Đã đóng", unit: "Dell-Lap", action:"" },
+                { id: 4, number: 4, name: "Nguyễn Văn D", types: "Trả nợ", user: "Đặng Thanh Nhật", department: "Maketing", location: "TSGMK", status: "Hoạt động", unit: "Apple", action:"" },
+                { id: 5, number: 5, name: "Nguyễn Văn E", types: "Hoàn ứng", user: "Đặng Thanh An", department: "Lập trình", location: "TSGLT", status: "Tạm dừng", unit: "HP", action:"" },
+            ]
         };
         this.showFilter = this.showFilter.bind(this);
         this.tog_Edit = this.tog_Edit.bind(this);
+        this.tog_Delete = this.tog_Delete.bind(this);
+        this.removeRowItem = this.removeRowItem.bind(this);
+    }
+
+    removeRowItem(id) {
+        let tableList = this.state.tableList;
+        var filtered = tableList.filter(function (item) {
+            return item.id !==id;
+        });
+        this.setState({tableList: filtered});
+        this.setState({ modalDelete: id });
     }
 
     tog_Edit() {
         this.setState(prevState => ({
             modalEdit: !prevState.modalEdit
+        }));
+        this.removeBodyCss();
+    }
+
+    tog_Delete() {
+        this.setState(prevState => ({
+            modalDelete: !prevState.modalDelete
         }));
         this.removeBodyCss();
     }
@@ -33,10 +61,12 @@ class Filter extends Component {
         });
     }
 
-
+    
     handleRemoveRow(e, idx) {
         if (typeof (idx) != "undefined")
           document.getElementById("addr" + idx).style.display = "none";
+          this.setState({ modalDelete: false });
+          
     };
 
     render() {
@@ -204,269 +234,100 @@ class Filter extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr id="addr01">
-                                                <td>1</td>
-                                                <td>Nguyễn Thành An</td>
-                                                <td>Thanh toán</td>
-                                                <td>
-                                                    Đặng Thành Nam
-                                                </td>
-                                                <td>Phòng Kế toán</td>
-                                                <td>
-                                                    TSGACT
-                                                </td>
-                                                <td>
-                                                    <span className="badge badge-primary">Hoạt động</span>
-                                                </td>
-                                                <td>
-                                                    Giang Hoàng
-                                                </td>
-                                                <td>
-                                                    <div className="button-items text-right">
-                                                        <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
-                                                            <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
-                                                        </button>
-                                                        <button className="waves-effect btn waves-light" 
-                                                        type="button" value="del" 
-                                                        onClick={e => this.handleRemoveRow(e, "01")}
-                                                        >
-                                                            <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-
-                                            <tr  id="addr03">
-                                                <td>2</td>
-                                                <td>Nguyễn Cường Mạnh</td>
-                                                <td>Thu nợ</td>
-                                                <td>
-                                                    Trần Anh
-                                                </td>
-                                                <td>Phòng IT</td>
-                                                <td>
-                                                    TSGWAIT
-                                                </td>
-                                                <td>
-                                                    <span className="badge badge-warning">Tạm dừng</span>
-                                                </td>
-                                                <td>
-                                                    Giang Hoàng
-                                                </td>
-                                                <td>
-                                                    <div className="button-items text-right">
-                                                        <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
-                                                            <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
-                                                        </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "02")}>
-                                                            <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            
-                                            <tr  id="addr04">
-                                                <td>3</td>
-                                                <td>Nguyễn Anh Minh</td>
-                                                <td>Truy lĩnh</td>
-                                                <td>
-                                                    Lê Bảo Hân
-                                                </td>
-                                                <td>Phòng Nhân sự</td>
-                                                <td>
-                                                    TSGHRM
-                                                </td>
-                                                <td>
-                                                    <span className="badge badge-danger">Đã đóng</span>
-                                                </td>
-                                                <td>
-                                                    Hoàng Sơn
-                                                </td>
-                                                <td>
-                                                    <div className="button-items text-right">
-                                                        <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
-                                                            <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
-                                                        </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "03")}>
-                                                            <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-
-                                            <tr  id="addr05">
-                                                <td>4</td>
-                                                <td>Nguyễn Thành An</td>
-                                                <td>Thanh toán</td>
-                                                <td>
-                                                    Đặng Thành Nam
-                                                </td>
-                                                <td>Phòng Kế toán</td>
-                                                <td>
-                                                    TSGACT
-                                                </td>
-                                                <td>
-                                                    <span className="badge badge-primary">Hoạt động</span>
-                                                </td>
-                                                <td>
-                                                    Giang Hoàng
-                                                </td>
-                                                <td>
-                                                    <div className="button-items text-right">
-                                                        <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
-                                                            <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
-                                                        </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "04")}>
-                                                            <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-
-                                            <tr  id="addr06">
-                                                <td>5</td>
-                                                <td>Nguyễn Cường Mạnh</td>
-                                                <td>Thu nợ</td>
-                                                <td>
-                                                    Trần Anh
-                                                </td>
-                                                <td>Phòng IT</td>
-                                                <td>
-                                                    TSGWAIT
-                                                </td>
-                                                <td>
-                                                    <span className="badge badge-warning">Tạm dừng</span>
-                                                </td>
-                                                <td>
-                                                    Giang Hoàng
-                                                </td>
-                                                <td>
-                                                    <div className="button-items text-right">
-                                                        <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
-                                                            <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
-                                                        </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "05")}>
-                                                            <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            
-                                            <tr  id="addr07">
-                                                <td>6</td>
-                                                <td>Nguyễn Anh Minh</td>
-                                                <td>Truy lĩnh</td>
-                                                <td>
-                                                    Lê Bảo Hân
-                                                </td>
-                                                <td>Phòng Nhân sự</td>
-                                                <td>
-                                                    TSGHRM
-                                                </td>
-                                                <td>
-                                                    <span className="badge badge-danger">Đã đóng</span>
-                                                </td>
-                                                <td>
-                                                    Hoàng Sơn
-                                                </td>
-                                                <td>
-                                                    <div className="button-items text-right">
-                                                        <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
-                                                            <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
-                                                        </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "06")}>
-                                                            <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-
-                                            <tr  id="addr08">
-                                                <td>7</td>
-                                                <td>Nguyễn Thành An</td>
-                                                <td>Thanh toán</td>
-                                                <td>
-                                                    Đặng Thành Nam
-                                                </td>
-                                                <td>Phòng Kế toán</td>
-                                                <td>
-                                                    TSGACT
-                                                </td>
-                                                <td>
-                                                    <span className="badge badge-primary">Hoạt động</span>
-                                                </td>
-                                                <td>
-                                                    Giang Hoàng
-                                                </td>
-                                                <td>
-                                                    <div className="button-items text-right">
-                                                        <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
-                                                            <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
-                                                        </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "07")}>
-                                                            <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-
-                                            <tr  id="addr09">
-                                                <td>8</td>
-                                                <td>Nguyễn Cường Mạnh</td>
-                                                <td>Thu nợ</td>
-                                                <td>
-                                                    Trần Anh
-                                                </td>
-                                                <td>Phòng IT</td>
-                                                <td>
-                                                    TSGWAIT
-                                                </td>
-                                                <td>
-                                                    <span className="badge badge-warning">Tạm dừng</span>
-                                                </td>
-                                                <td>
-                                                    Giang Hoàng
-                                                </td>
-                                                <td>
-                                                    <div className="button-items text-right">
-                                                        <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
-                                                            <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
-                                                        </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "08")}>
-                                                            <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            
-                                            <tr  id="addr10">
-                                                <td>9</td>
-                                                <td>Nguyễn Anh Minh</td>
-                                                <td>Truy lĩnh</td>
-                                                <td>
-                                                    Lê Bảo Hân
-                                                </td>
-                                                <td>Phòng Nhân sự</td>
-                                                <td>
-                                                    TSGHRM
-                                                </td>
-                                                <td>
-                                                    <span className="badge badge-danger">Đã đóng</span>
-                                                </td>
-                                                <td>
-                                                    Hoàng Sơn
-                                                </td>
-                                                <td>
-                                                    <div className="button-items text-right">
-                                                        <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
-                                                            <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
-                                                        </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "01")}>
-                                                            <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            {
+                                                this.state.tableList.map((lists) =>
+                                                    <tr key={ lists.id }>
+                                                        <td>
+                                                            { lists.number }
+                                                        </td>
+                                                        <td>
+                                                            { lists.name }
+                                                        </td>
+                                                        <td>
+                                                            { lists.types }
+                                                        </td>
+                                                        <td>
+                                                            { lists.user }
+                                                        </td>
+                                                        <td>
+                                                            { lists.department }
+                                                        </td>
+                                                        <td>
+                                                            { lists.location }
+                                                        </td>
+                                                        <td>
+                                                            { lists.status }
+                                                        </td>
+                                                        <td>
+                                                            { lists.unit }
+                                                        </td>
+                                                        <td>
+                                                            <div className="button-items text-right">
+                                                                <button className="waves-effect btn waves-light" 
+                                                                    onClick={ this.tog_Edit }>
+                                                                    <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
+                                                                </button>
+                                                                <button className="waves-effect btn waves-light" 
+                                                                    type="button" value="del" 
+                                                                    onClick={ this.tog_Delete }
+                                                                    id = { lists.id }
+                                                                >
+                                                                    <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
+                                                                </button>
+                                                                
+                                                            </div>
+                                                            {/* confirmDel */}
+                                                            <Modal
+                                                                size="sm"
+                                                                isOpen={ this.state.modalDelete ==  lists.id }
+                                                                toggle={ this.tog_Delete }
+                                                                >
+                                                                <div className="modal-header">
+                                                                    <h5
+                                                                        className="modal-title mt-0 text-primary"
+                                                                        id="modalDel"
+                                                                        >
+                                                                        Bạn muốn xóa không ?
+                                                                    </h5>
+                                                                    <button
+                                                                        onClick={() =>
+                                                                            this.setState({ modalDelete: false })
+                                                                        }
+                                                                        type="button"
+                                                                        className="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-label="Close"
+                                                                        >
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div className="modal-body">
+                                                                
+                                                                    <div className="button-items text-center">
+                                                                        <button type="button" className="btn btn-primary btn-md waves-effect waves-light"
+                                                                            onClick={() =>
+                                                                                this.setState({ modalDelete: false })
+                                                                            }
+                                                                            data-dismiss="modal"
+                                                                            aria-label="Close"
+                                                                            > Hủy
+                                                                        </button>
+                                                                        <button className="waves-effect btn-danger btn btn-md waves-light" type="button" value="del"  
+                                                                            onClick={() => this.removeRowItem(lists.id)}
+                                                                            data-dismiss="modal"
+                                                                            aria-label="Close"
+                                                                        >
+                                                                            Xóa
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </Modal>
+                                                            
+                                                        </td>
+                                                       
+                                                    </tr>
+                                                )
+                                            }
 
                                         </tbody>
                                     </Table>
@@ -623,6 +484,7 @@ class Filter extends Component {
                                     </div>
                                 </div>
                             </Modal>
+                            
                         </div>
                     </CardBody>
                 </Card>

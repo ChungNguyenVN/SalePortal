@@ -21,15 +21,24 @@ class InvoiceList extends Component {
         super(props);
         this.state = {
             isFilter: false,
-            modalEdit: false
+            modalEdit: false,
+            modalDelete: false
         };
         this.showFilter = this.showFilter.bind(this);
         this.tog_Edit = this.tog_Edit.bind(this);
+        this.tog_Delete = this.tog_Delete.bind(this);
     }
 
     tog_Edit() {
         this.setState(prevState => ({
             modalEdit: !prevState.modalEdit
+        }));
+        this.removeBodyCss();
+    }
+
+    tog_Delete() {
+        this.setState(prevState => ({
+            modalDelete: !prevState.modalDelete
         }));
         this.removeBodyCss();
     }
@@ -48,6 +57,8 @@ class InvoiceList extends Component {
     handleRemoveRow(e, idx) {
         if (typeof (idx) != "undefined")
           document.getElementById("addr" + idx).style.display = "none";
+          this.setState({ modalDelete: false });
+          
     };
     render() {
         return(
@@ -239,8 +250,9 @@ class InvoiceList extends Component {
                                                             <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
                                                         </button>
                                                         <button className="waves-effect btn waves-light" 
-                                                        type="button" value="del" 
-                                                        onClick={e => this.handleRemoveRow(e, "01")}
+                                                            type="button" value="del" 
+                                                            onClick={ this.tog_Delete }
+                                                            // onClick={e => this.handleRemoveRow(e, "01")}
                                                         >
                                                             <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
                                                         </button>
@@ -270,7 +282,11 @@ class InvoiceList extends Component {
                                                         <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
                                                             <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
                                                         </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "02")}>
+                                                        <button className="waves-effect btn waves-light" 
+                                                            type="button" value="del" 
+                                                            onClick={ this.tog_Delete }
+                                                            // onClick={e => this.handleRemoveRow(e, "01")}
+                                                        >
                                                             <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
                                                         </button>
                                                     </div>
@@ -299,7 +315,11 @@ class InvoiceList extends Component {
                                                         <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
                                                             <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
                                                         </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "03")}>
+                                                        <button className="waves-effect btn waves-light" 
+                                                            type="button" value="del" 
+                                                            onClick={ this.tog_Delete }
+                                                            // onClick={e => this.handleRemoveRow(e, "01")}
+                                                        >
                                                             <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
                                                         </button>
                                                     </div>
@@ -328,7 +348,11 @@ class InvoiceList extends Component {
                                                         <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
                                                             <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
                                                         </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "04")}>
+                                                        <button className="waves-effect btn waves-light" 
+                                                            type="button" value="del" 
+                                                            onClick={ this.tog_Delete }
+                                                            // onClick={e => this.handleRemoveRow(e, "01")}
+                                                        >
                                                             <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
                                                         </button>
                                                     </div>
@@ -357,7 +381,11 @@ class InvoiceList extends Component {
                                                         <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
                                                             <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
                                                         </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "05")}>
+                                                        <button className="waves-effect btn waves-light" 
+                                                            type="button" value="del" 
+                                                            onClick={ this.tog_Delete }
+                                                            // onClick={e => this.handleRemoveRow(e, "01")}
+                                                        >
                                                             <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
                                                         </button>
                                                     </div>
@@ -386,7 +414,11 @@ class InvoiceList extends Component {
                                                         <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
                                                             <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
                                                         </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "06")}>
+                                                        <button className="waves-effect btn waves-light" 
+                                                            type="button" value="del" 
+                                                            onClick={ this.tog_Delete }
+                                                            // onClick={e => this.handleRemoveRow(e, "01")}
+                                                        >
                                                             <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
                                                         </button>
                                                     </div>
@@ -415,7 +447,11 @@ class InvoiceList extends Component {
                                                         <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
                                                             <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
                                                         </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "07")}>
+                                                        <button className="waves-effect btn waves-light" 
+                                                            type="button" value="del" 
+                                                            onClick={ this.tog_Delete }
+                                                            // onClick={e => this.handleRemoveRow(e, "01")}
+                                                        >
                                                             <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
                                                         </button>
                                                     </div>
@@ -444,7 +480,11 @@ class InvoiceList extends Component {
                                                         <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
                                                             <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
                                                         </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "08")}>
+                                                        <button className="waves-effect btn waves-light" 
+                                                            type="button" value="del" 
+                                                            onClick={ this.tog_Delete }
+                                                            // onClick={e => this.handleRemoveRow(e, "01")}
+                                                        >
                                                             <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
                                                         </button>
                                                     </div>
@@ -473,7 +513,11 @@ class InvoiceList extends Component {
                                                         <button className="waves-effect btn waves-light" onClick={ this.tog_Edit }>
                                                             <i className="fa fa-pencil mr-2 align-middle text-primary font-size-16"></i>
                                                         </button>
-                                                        <button className="waves-effect btn waves-light" type="button" value="del"  onClick={e => this.handleRemoveRow(e, "01")}>
+                                                        <button className="waves-effect btn waves-light" 
+                                                            type="button" value="del" 
+                                                            onClick={ this.tog_Delete }
+                                                            // onClick={e => this.handleRemoveRow(e, "01")}
+                                                        >
                                                             <i className="fa fa-trash mr-2 align-middle text-danger font-size-16"></i>
                                                         </button>
                                                     </div>
@@ -633,6 +677,62 @@ class InvoiceList extends Component {
                                             > Đóng
                                         </button>
                                     </div>
+                                </div>
+                            </Modal>
+                            {/* confirmDel */}
+                            <Modal
+                                size="sm"
+                                isOpen={ this.state.modalDelete }
+                                toggle={ this.tog_Delete }
+                                >
+                                <div className="modal-header">
+                                    <h5
+                                        className="modal-title mt-0 text-primary"
+                                        id="modalDel"
+                                        >
+                                        Bạn muốn xóa không ?
+                                    </h5>
+                                    <button
+                                        onClick={() =>
+                                            this.setState({ modalDelete: false })
+                                        }
+                                        type="button"
+                                        className="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                        >
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div className="modal-body">
+                                   
+                                    <div className="button-items text-center">
+                                        <button type="button" className="btn btn-primary btn-md waves-effect waves-light"
+                                            onClick={() =>
+                                                this.setState({ modalDelete: false })
+                                            }
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                            > Hủy
+                                        </button>
+                                        <button className="waves-effect btn-danger btn btn-md waves-light" type="button" value="del"  
+                                            onClick={e => this.handleRemoveRow(e, "01")}
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                        >
+                                            Xóa
+                                        </button>
+                                    </div>
+                                    {/* <div className="text-center mt-3 col-lg-12">
+                                        <button type="button" className="btn btn-primary btn-md waves-effect waves-light"
+                                            onClick={() =>
+                                                this.setState({ modalDelete: false })
+                                            }
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                            > Đóng
+                                        </button>
+                                    </div> */}
                                 </div>
                             </Modal>
                         </div>
